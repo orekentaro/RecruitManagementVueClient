@@ -6,3 +6,8 @@
   </div>
 </template>
 <script lang="ts" setup></script>
+<style>
+.box-card {
+  width: 100%;
+}
+</style>

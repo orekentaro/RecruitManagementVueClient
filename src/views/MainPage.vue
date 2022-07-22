@@ -13,9 +13,6 @@
     </el-container>
   </div>
 </template>
-<script lang="ts" setup>
-import SideBar from "../components/SideBar.vue";
-import Header from "../components/Header.vue";
-</script>
+<script lang="ts" setup></script>
 
 <style></style>

@@ -90,15 +90,20 @@ const submitForm = (formEl: FormInstance | undefined) => {
       var data = new FormData();
       data.append("email", formData.email);
       data.append("password", formData.password);
-      axios.post("/api/user/login", data, { withCredentials: true }).then((response) => {
-        let res = response.data["result"];
-        if (res == "success") {
-          router.push("/");
-        } else {
-          showMassage("ログインに失敗しました", "error");
-          return false;
-        }
-      });
+      axios
+        .post("/api/login", data, { withCredentials: true })
+        .then((response) => {
+          let res = response.data["result"];
+          if (res == "success") {
+            router.push("/");
+          } else {
+            showMassage("ログインに失敗しました", "error");
+            return false;
+          }
+        })
+        .catch((e) => {
+          showMassage(`ログインに失敗しました:${e}`, "error");
+        });
     } else {
       return false;
     }
