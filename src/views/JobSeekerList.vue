@@ -4,8 +4,9 @@
   <el-card class="box-card">
     <el-table :data="filterTableData" style="width: 100%">
       <el-table-column label="名前" prop="name" />
-      <el-table-column label="フェーズ" prop="phase" />
-      <el-table-column label="対応状況" prop="result" />
+      <el-table-column label="媒体" prop="job_ads" />
+      <el-table-column label="タイトル" prop="title" />
+      <el-table-column label="結果" prop="result" />
       <el-table-column align="right">
         <template #header>
           <el-input v-model="search" size="small" placeholder="Type to search" />
@@ -54,10 +55,20 @@ const handleDelete = (index: number, row: JobSeekerList) => {
   console.log(index, row);
 };
 
-let tableData: JobSeekerList[] = [];
+let tableData: JobSeekerList[] = [
+  {
+    gender: "男性",
+    job_ads: "テスト求人",
+    job_id: "1",
+    name: "テスト太郎",
+    phase: "一次面接",
+    result: "日程調整中",
+    title: "未経験可",
+  },
+];
 console.log("hello");
 axios
-  .get("/api/job_seeker_list", { withCredentials: true })
+  .get("/api/job_seeker", { withCredentials: true })
   .then((response) => {
     let res = response.data;
     if (res["result"] == "success") {

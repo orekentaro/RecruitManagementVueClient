@@ -52,6 +52,7 @@ import axios from "axios";
 import { reactive, ref } from "vue";
 import type { ElForm } from "element-plus";
 import showMassage from "../utils/message";
+import { LoginForm } from "../type";
 type FormInstance = InstanceType<typeof ElForm>;
 const ruleFormRef = ref<FormInstance>();
 
@@ -74,12 +75,12 @@ const rules = reactive({
   ],
 });
 
-type loginForm = {
+type LoginForm = {
   email: string;
   password: string;
 };
 
-const formData: loginForm = reactive({
+const formData: LoginForm = reactive({
   email: "",
   password: "",
 });

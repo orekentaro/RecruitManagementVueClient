@@ -8,7 +8,7 @@ import JobVacancies from './views/JobVacancies.vue';
 import JobVacanciesList from './views/JobVacanciesList.vue';
 import Recruiter from './views/Recruiter.vue';
 import DashBoard from './views/DashBoard.vue';
-import RecruitementFlow from './views/ RecruitmentFlow.vue';
+import RecruitementFlow from './views/RecruitmentFlow.vue';
 import Permission from './views/Permission.vue';
 import ParameterStor from './views/ParameterStor.vue';
 import { store } from "./store"
