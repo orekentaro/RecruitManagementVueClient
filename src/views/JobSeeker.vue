@@ -1,52 +1,48 @@
 <template>
-  <h2>進行中求職者</h2>
-
   <el-card class="box-card">
-    <el-table :data="filterTableData" style="width: 100%">
-      <el-table-column label="名前" prop="name" />
-      <el-table-column label="フェーズ" prop="phase" />
-      <el-table-column label="現状ステータス" prop="status" />
-      <el-table-column label="担当者" prop="corr_person" />
-      <el-table-column align="right">
-        <template #header>
-          <el-input v-model="search" size="small" placeholder="Type to search" />
-        </template>
-        <template #default="scope">
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
-            >Edit</el-button
-          >
-          <el-button
-            size="small"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-            >Delete</el-button
-          >
-        </template>
-      </el-table-column>
-    </el-table>
+    <template v-if="!detail_flag">
+      <ListTable
+        :title="table_title"
+        :table-data="tableData"
+        :table-column="table_column"
+        @submitDetail="handleDetail"
+        @submitDelete="handleDelete"
+      />
+    </template>
+    <template v-else>
+      <el-button size="small" @click="detail_flag = false">終了</el-button>
+      {{ detail_job_seeker }}
+    </template>
   </el-card>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, onBeforeMount, reactive } from "vue";
+import { ref, onBeforeMount, reactive } from "vue";
 import axios from "axios";
 import showMassage from "../utils/message";
 import { JobSeeker } from "../type";
-const search = ref("");
-const filterTableData = computed(() =>
-  tableData.filter(
-    (data) =>
-      !search.value || data.name.toLowerCase().includes(search.value.toLowerCase())
-  )
-);
-const handleEdit = (index: number, row: JobSeeker) => {
-  console.log(index, row["job_id"]);
-};
-const handleDelete = (index: number, row: JobSeeker) => {
-  console.log(index, row["job_id"]);
+
+const table_title = "進行中求職者";
+const table_column = {
+  name: "名前",
+  phase: "フェーズ",
+  status: "現状ステータス",
+  corr_person: "担当者",
 };
 
-let tableData: JobSeeker[] = reactive([]);
+let detail_flag = ref<boolean>(false);
+let detail_job_seeker = ref<JobSeeker>();
+const tableData: JobSeeker[] = reactive([]);
+
+const handleDetail = (value: JobSeeker) => {
+  detail_flag.value = true;
+  detail_job_seeker.value = value;
+};
+
+const handleDelete = (value: JobSeeker) => {
+  console.log("削除", value);
+};
+
 onBeforeMount(() => {
   axios
     .get("/api/job_seeker?active_flag=0", { withCredentials: true })

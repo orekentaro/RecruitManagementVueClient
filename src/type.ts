@@ -14,6 +14,7 @@ export interface JobSeeker {
 export interface Memo {
   create_time: BigInteger;
   memo: String;
+  changer: String;
 }
 
 export interface Progress {

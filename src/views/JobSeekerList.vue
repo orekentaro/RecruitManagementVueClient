@@ -66,7 +66,6 @@ let tableData: JobSeekerList[] = [
     title: "未経験可",
   },
 ];
-console.log("hello");
 axios
   .get("/api/job_seeker", { withCredentials: true })
   .then((response) => {

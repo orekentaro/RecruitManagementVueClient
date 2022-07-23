@@ -40,8 +40,11 @@ declare module 'vue' {
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     Header: typeof import('./src/components/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    JobSeekerDetail: typeof import('./src/components/job_seeker_components/JobSeekerDetail.vue')['default']
+    ListTable: typeof import('./src/components/table_components/ListTable.vue')['default']
     NameInput: typeof import('./src/components/form_components/NameInput.vue')['default']
     SideBar: typeof import('./src/components/SideBar.vue')['default']
+    TableHeaderTitle: typeof import('./src/components/table_components/TableHeaderTitle.vue')['default']
   }
 }
 
