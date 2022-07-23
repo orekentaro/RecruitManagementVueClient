@@ -48,10 +48,10 @@
 </template>
 <script lang="ts" setup>
 import router from "../router";
-import axios from "axios";
 import { reactive, ref } from "vue";
 import type { ElForm } from "element-plus";
 import showMassage from "../utils/message";
+import { postApi } from "../utils/api";
 import { LoginForm } from "../type";
 type FormInstance = InstanceType<typeof ElForm>;
 const ruleFormRef = ref<FormInstance>();
@@ -74,12 +74,6 @@ const rules = reactive({
     },
   ],
 });
-
-type LoginForm = {
-  email: string;
-  password: string;
-};
-
 const formData: LoginForm = reactive({
   email: "",
   password: "",
@@ -91,8 +85,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       var data = new FormData();
       data.append("email", formData.email);
       data.append("password", formData.password);
-      axios
-        .post("/api/login", data, { withCredentials: true })
+      postApi("/api/login", data)
         .then((response) => {
           let res = response.data["result"];
           if (res == "success") {

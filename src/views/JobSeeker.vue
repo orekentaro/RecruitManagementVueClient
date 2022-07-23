@@ -18,8 +18,8 @@
 
 <script lang="ts" setup>
 import { ref, onBeforeMount, reactive } from "vue";
-import axios from "axios";
 import showMassage from "../utils/message";
+import { fetchApi } from "../utils/api";
 import { JobSeeker } from "../type";
 
 const table_title = "進行中求職者";
@@ -44,8 +44,7 @@ const handleDelete = (value: JobSeeker) => {
 };
 
 onBeforeMount(() => {
-  axios
-    .get("/api/job_seeker?active_flag=0", { withCredentials: true })
+  fetchApi("/api/job_seeker?active_flag=0")
     .then((response) => {
       let res = response.data;
       if (res["result"] == "success") {
