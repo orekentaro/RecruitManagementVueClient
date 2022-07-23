@@ -56,7 +56,6 @@ onBeforeMount(() => {
         res["data"].forEach((element: JobSeeker) => {
           tableData.push(element);
         });
-        console.log(res["data"]);
         showMassage("進行中求職者の取得に成功しました", "success");
       } else {
         showMassage("進行中求職者の取得に失敗しました", "error");
