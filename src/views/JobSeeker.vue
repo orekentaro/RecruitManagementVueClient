@@ -1,5 +1,6 @@
 <template>
   <el-card class="box-card">
+    <CloseButton v-if="detail_flag" @close="detail_flag = false" />
     <template v-if="!detail_flag">
       <ListTable
         :title="table_title"
@@ -10,8 +11,7 @@
       />
     </template>
     <template v-else>
-      <el-button size="small" @click="detail_flag = false">終了</el-button>
-      {{ detail_job_seeker }}
+      <JobSeekerDetail :data="detail_job_seeker" />
     </template>
   </el-card>
 </template>
@@ -21,6 +21,8 @@ import { ref, onBeforeMount, reactive } from "vue";
 import showMassage from "../utils/message";
 import { fetchApi } from "../utils/api";
 import { JobSeeker } from "../type";
+import CloseButton from "../components/CloseButton.vue";
+import JobSeekerDetail from "../components/job_seeker_components/JobSeekerDetail.vue";
 
 const table_title = "進行中求職者";
 const table_column = {
@@ -31,7 +33,7 @@ const table_column = {
 };
 
 let detail_flag = ref<boolean>(false);
-let detail_job_seeker = ref<JobSeeker>();
+let detail_job_seeker = ref<JobSeeker | undefined>();
 const tableData: JobSeeker[] = reactive([]);
 
 const handleDetail = (value: JobSeeker) => {
@@ -62,3 +64,12 @@ onBeforeMount(() => {
     });
 });
 </script>
+
+<style>
+.close-button {
+  float: right;
+}
+.close-button:hover {
+  cursor: pointer;
+}
+</style>

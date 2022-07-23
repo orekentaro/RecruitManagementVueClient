@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Alert: typeof import('./src/components/Alert.vue')['default']
+    CloseButton: typeof import('./src/components/CloseButton.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
